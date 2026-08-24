@@ -6,5 +6,6 @@
 # Local preview scripts/temp files
 server.js
 node_modules/
+dist/
 .DS_Store
 Thumbs.db
