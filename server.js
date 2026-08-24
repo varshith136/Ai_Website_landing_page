@@ -24,6 +24,14 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // Fallback to public folder for static assets (like assets/mentor.png)
+    if (!fs.existsSync(filePath) && safeUrl !== '/') {
+        let publicPath = path.join(__dirname, 'public', safeUrl);
+        if (publicPath.startsWith(__dirname) && fs.existsSync(publicPath)) {
+            filePath = publicPath;
+        }
+    }
+
     const ext = path.extname(filePath);
     
     fs.readFile(filePath, (err, content) => {
