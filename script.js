@@ -2,9 +2,8 @@
 // AI Website Building Webinar - JavaScript Functionality
 // ==========================================================================
 
-// 1. PLACEHOLDER REGISTRATION URL
-// Replace this with the actual checkout/registration page URL when ready.
-const REGISTRATION_URL = "https://example.com/register";
+// 1. RAZORPAY REGISTRATION URL
+const REGISTRATION_URL = "https://rzp.io/rzp/KEXZYJO";
 
 document.addEventListener("DOMContentLoaded", () => {
     // 2. INITIALIZE LUCIDE ICONS
@@ -17,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ctaButtons.forEach(button => {
         button.addEventListener("click", (e) => {
             e.preventDefault();
-            // Open registration URL in a new tab
-            window.open(REGISTRATION_URL, "_blank", "noopener,noreferrer");
+            // Redirect to Razorpay hosted payment page in the same window
+            window.location.href = REGISTRATION_URL;
         });
     });
 
