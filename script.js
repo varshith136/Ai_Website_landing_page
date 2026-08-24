@@ -51,4 +51,49 @@ document.addEventListener("DOMContentLoaded", () => {
             element.classList.add("visible");
         });
     }
+
+    // 5. URGENCY COUNTDOWN TIMER & SEAT COUNTER
+    const timerDuration = 300; // 5 minutes in seconds
+    let timeRemaining = timerDuration;
+    
+    const timerElements = document.querySelectorAll(".countdown-timer");
+    const spotsElements = document.querySelectorAll(".spots-count");
+    
+    function updateUrgencyDisplays() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        timerElements.forEach(el => {
+            el.textContent = timeString;
+        });
+        
+        // Count down seats from 8 to 3 as time ticks away
+        let spotsLeft = 8;
+        if (timeRemaining < 250 && timeRemaining >= 180) {
+            spotsLeft = 7;
+        } else if (timeRemaining < 180 && timeRemaining >= 120) {
+            spotsLeft = 6;
+        } else if (timeRemaining < 120 && timeRemaining >= 60) {
+            spotsLeft = 5;
+        } else if (timeRemaining < 60 && timeRemaining >= 20) {
+            spotsLeft = 4;
+        } else if (timeRemaining < 20) {
+            spotsLeft = 3;
+        }
+        
+        spotsElements.forEach(el => {
+            el.textContent = spotsLeft;
+        });
+    }
+    
+    setInterval(() => {
+        timeRemaining--;
+        if (timeRemaining < 0) {
+            timeRemaining = timerDuration; // Reset to 5:00
+        }
+        updateUrgencyDisplays();
+    }, 1000);
+    
+    updateUrgencyDisplays();
 });
